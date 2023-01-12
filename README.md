@@ -11,6 +11,8 @@ Things to note about this application:
 
 - The user can run the code without sourcing seeds.sql - they can build a database from scratch if they so choose.
 
+- The .env file is included in the .gitignore to protect my credentials. For those perusing this readme, make sure you create your own .env for database, user, password
+
 The following commands were entered into the terminal to run the application from localhost:
 - npm init -y
 - npm i express
@@ -21,6 +23,9 @@ The following commands were entered into the terminal to run the application fro
     - SOURCE db/seeds.sql
     - exit (or open the root folder in another integrated terminal)
 - npm start (application begins) 
+
+The tables in the company_db database are linked as follows: 
+![Shows relationship between tables](./assets/12-sql-homework-demo-01.png)
 
 
 ## Installation
