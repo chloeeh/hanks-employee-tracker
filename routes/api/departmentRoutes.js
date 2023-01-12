@@ -1,7 +1,7 @@
 const departmentRouter = require('express').Router();
 const Department = require('../../models/Department');
 
-router.get('/', async (req, res) => {
+departmentRouter.get('/', async (req, res) => {
   // Store the departmentData in a variable once the promise is resolved.
   try {
     const departmentData = await Department.findAll();
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // Updates department based on its department_id
-router.put('/:department_id', async (req, res) => {
+departmentRouter.put('/:department_id', async (req, res) => {
   //Calls the update method on the Department model
   const updatedDepartment = await Department.update(
     {
@@ -33,7 +33,7 @@ router.put('/:department_id', async (req, res) => {
 });
 
 // Delete route for a department with a matching department_id
-router.delete('/:department_id', async (req, res) => {
+departmentRouter.delete('/:department_id', async (req, res) => {
   // Looks for the department based on the department_id given in the request parameters
   const deletedDepartment = await Department.destroy({
     where: {

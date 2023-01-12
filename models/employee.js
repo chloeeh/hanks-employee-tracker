@@ -10,13 +10,16 @@ Employee.init(
       primaryKey: true,
       autoIncrement: true
     },
-    title: {
+    first_name: {
       type: DataTypes.STRING
     },
-    salary: {
+    last_name: {
+      type: DataTypes.STRING
+    },
+    role_id: {
       type: DataTypes.INTEGER
     },
-    department_id: {
+    manager_id: {
       type: DataTypes.INTEGER
     }
   },

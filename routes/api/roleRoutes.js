@@ -1,7 +1,7 @@
 const roleRouter = require('express').Router();
 const Role = require('../../models/Role');
 
-router.get('/', async (req, res) => {
+roleRouter.get('/', async (req, res) => {
   // Store the roleData in a variable once the promise is resolved.
   try {
     const roleData = await Role.findAll();

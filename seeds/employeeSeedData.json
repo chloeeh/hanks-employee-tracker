@@ -1,6 +1,5 @@
 [
   {
-    
     "first_name": "Patrick",
     "last_name": "Whalen",
     "role_id": 1,
@@ -8,7 +7,6 @@
     "is_accessible": true
   },
   {
-    
     "first_name": "Justin",
     "last_name": "Epperson",
     "role_id": 2,
@@ -16,7 +14,6 @@
     "is_accessible": true
   },
   {
-    
     "first_name": "Gary",
     "last_name": "Bradley",
     "role_id": 3,
@@ -24,7 +21,6 @@
     "is_accessible": true
   },
   {
-    
     "first_name": "Chloe",
     "last_name": "Hanks",
     "role_id": 2,
@@ -32,7 +28,6 @@
     "is_accessible": true
   },
   {
-    
     "first_name": "Colin",
     "last_name": "Campbell",
     "role_id": null,
