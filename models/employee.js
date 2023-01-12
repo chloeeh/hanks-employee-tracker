@@ -1,10 +1,13 @@
+// import modules
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+// create a class for the Employee data that extends from Model
 class Employee extends Model {}
 
 Employee.init(
   {
+    // hard-define the employee_id and set as primary key
     employee_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -32,4 +35,5 @@ Employee.init(
   }
 );
 
+// export this module to be used elsewhere
 module.exports = Employee;
