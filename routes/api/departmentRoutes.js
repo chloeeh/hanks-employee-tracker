@@ -1,6 +1,9 @@
+// import modules
 const departmentRouter = require('express').Router();
 const Department = require('../../models/Department');
 
+// to get the department data for this router, use async/await to set const departmentData with all
+// available data in the department table from company_db
 departmentRouter.get('/', async (req, res) => {
   // Store the departmentData in a variable once the promise is resolved.
   try {

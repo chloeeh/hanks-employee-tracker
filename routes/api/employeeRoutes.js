@@ -1,6 +1,8 @@
 const employeeRouter = require('express').Router();
 const Employee = require('../../models/Employee');
 
+// to get the employee data for this router, use async/await to set const employeeData with all
+// available data in the employee table from company_db
 employeeRouter.get('/', async (req, res) => {
   // Store the employeeData in a variable once the promise is resolved.
   try {

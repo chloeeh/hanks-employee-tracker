@@ -1,6 +1,8 @@
 const roleRouter = require('express').Router();
 const Role = require('../../models/Role');
 
+// to get the role data for this router, use async/await to set const roleData with all
+// available data in the role table from company_db
 roleRouter.get('/', async (req, res) => {
   // Store the roleData in a variable once the promise is resolved.
   try {

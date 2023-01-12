@@ -1,14 +1,10 @@
-/* -------------------------------------------------------------------------- */
-/*                                dependencies                                */
-/* -------------------------------------------------------------------------- */
+// import modules
+const inquirer = require('inquirer');
 
-import inquirer from 'inquirer';
+/* ----------------------------------------- DEFINE FUNCTIONS ----------------------------------------- */
 
-/* -------------------------------------------------------------------------- */
-/*                        view company data sql queries                       */
-/* -------------------------------------------------------------------------- */
-
-
+/* ------------------------------------- VIEW TABLES FUNCTIONS ------------------------------------- */
+// Show all information from department table
 function viewDepartments(connection, startPrompt) {
     const query = 'SELECT * FROM department';
     connection.query(query, (err, res) => {
@@ -18,6 +14,7 @@ function viewDepartments(connection, startPrompt) {
     });
 }
 
+// Show all information from role table
 function viewRoles(connection, startPrompt) {
     const query = 'SELECT * FROM role';
     connection.query(query, (err, res) => {
@@ -27,6 +24,7 @@ function viewRoles(connection, startPrompt) {
     });
 }
 
+// Show all information from employee table + the columns that are joined together according to the readme table linking scheme
 function viewAllEmployees(connection, startPrompt) {
     const query = `SELECT employee.id, employee.first_name, employee.last_name, 
         role.title, role.salary, 
@@ -43,10 +41,9 @@ function viewAllEmployees(connection, startPrompt) {
     });
 }
 
-/* -------------------------------------------------------------------------- */
-/*                           Create company sql queries                       */
-/* -------------------------------------------------------------------------- */
+/* ------------------------------------- ADD INFO FUNCTIONS ------------------------------------- */
 
+// Add a department to the department table
 function addDepartment(connection, startPrompt) {
     inquirer
         .prompt([
@@ -64,7 +61,9 @@ function addDepartment(connection, startPrompt) {
             },
         ])
         .then((answer) => {
-            connection.query('INSERT INTO department (name) VALUES (?)', answer.name, (err) => {
+            // make sure the 2nd argument, answer.dept_name, is the same "name" value that is listed in the 
+            // prompt name: "dept_name" otherwise it will not work
+            connection.query('INSERT INTO department (name) VALUES (?)', answer.dept_name, (err) => {
                 if (err) throw err;
                 console.log('Department successfully added.');
                 startPrompt();
@@ -72,7 +71,7 @@ function addDepartment(connection, startPrompt) {
         });
 }
 
-
+// Add a role to the role table
 function addRole(connection, startPrompt) {
     const newRole = {};
     connection.query('SELECT * FROM department', (err, results) => {
@@ -104,8 +103,9 @@ function addRole(connection, startPrompt) {
                     },
                 },
                 {
-                    name: 'name',
+                    name: 'dept_name',
                     type: 'list',
+                    // list the name of all the department
                     choices() {
                         const choiceArray = [];
                         for (let i = 0; i < results.length; i++) {
@@ -119,16 +119,14 @@ function addRole(connection, startPrompt) {
             .then((answer) => {
                 newRole.title = answer.title;
                 newRole.salary = answer.salary;
-
                 // Translate manager_name to id
+                // make sure the 2nd argument, answer.dept_name, is the same "name" value that is listed in the 
+                // prompt name: "dept_name" otherwise it will not work
                 connection.query(
-                    'SELECT id FROM department WHERE name = ?',
-                    answer.dept_name,
-                    (err, departmentResults) => {
+                    'SELECT id FROM department WHERE name = ?', answer.dept_name, (err, departmentResults) => {
                         if (err) throw err;
                         newRole.department_id = departmentResults[0].id;
                         console.log('Adding new role: ', newRole);
-
                         connection.query('INSERT INTO role SET ?', newRole, (err) => {
                             if (err) throw err;
                             console.log('Role successfully added.');
@@ -140,6 +138,9 @@ function addRole(connection, startPrompt) {
     });
 }
 
+// add a new employee to the employee table
+// link the employee to the roles table
+// link the employee to a manager
 function addEmployee(connection, startPrompt) {
     const newEmployee = {};
     connection.query('SELECT * FROM role', (err, results) => {
@@ -195,7 +196,9 @@ function addEmployee(connection, startPrompt) {
                 newEmployee.last_name = answer.last_name;
 
                 // Get the job role id from db
-                connection.query('SELECT * FROM role WHERE title = ?', answer.role, (err, jobRoleResults) => {
+                // make sure the 2nd argument, answer.employee_role, is the same "name" value that is listed in the 
+            // prompt name: "employee_role" otherwise it will not work
+                connection.query('SELECT * FROM role WHERE title = ?', answer.employee_role, (err, jobRoleResults) => {
                     if (err) throw err;
 
                     newEmployee.role_id = jobRoleResults[0].id;
@@ -244,18 +247,13 @@ function addEmployee(connection, startPrompt) {
     });
 }
 
+/* ------------------------------------- ADD ROLE FUNCTION ------------------------------------- */
 
-
-/* -------------------------------------------------------------------------- */
-/*                           Create company sql queries                       */
-/* -------------------------------------------------------------------------- */
-
-
-
-
+// Update an employee's role
 function updateRole(connection, startPrompt) {
     const employeeRoleObj = {};
-
+    // select all from the employee table + information linked between employee and 
+    // role tables, role and department tables, and employee to manager
     connection.query(
         `SELECT employee.id, employee.first_name, employee.last_name, 
         role.title, role.salary, 
@@ -326,9 +324,5 @@ function updateRole(connection, startPrompt) {
     );
 }
 
-/* -------------------------------------------------------------------------- */
-/*                            export view functions                           */
-/* -------------------------------------------------------------------------- */
-
-export { viewDepartments, viewRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateRole };
-Footer
+// export functions to be used elsewhere, namely in server.js
+module.exports = { viewDepartments, viewRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateRole };
