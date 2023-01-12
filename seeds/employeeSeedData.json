@@ -35,7 +35,7 @@
     
     "first_name": "Colin",
     "last_name": "Campbell",
-    "role_id": 4,
+    "role_id": null,
     "manager_id": 1950,
     "is_accessible": true
   }

@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node seeds/databaseSeeds.js",
+    "random": "echo \"I'm a custom script\""
   },
   "repository": {
     "type": "git",
@@ -25,5 +29,6 @@
     "inquirer": "^8.2.4",
     "mysql2": "^3.0.0",
     "sequelize": "^6.28.0"
-  }
+  },
+  "devDependencies": {}
 }
