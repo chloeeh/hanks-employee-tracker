@@ -1,25 +1,27 @@
 const sequelize = require('../config/connection');
 
-const Employee = require('../models/Employee');
-// TODO: look into this...second database? idk
+const Department = require('../models/Department');
 const Role = require('../models/Role');
+const Employee = require('../models/Employee');
 
-const employeeSeedData = require('./employeeSeedData.json');
+
+const departmentSeedData = require('./departmentSeedData.json');
 const roleSeedData = require('./roleSeedData.json');
+const employeeSeedData = require('./employeeSeedData.json');
 
 // Add the `async` keyword to the function `seedDatabase` to make Asynchronous.
-const employeeSeedDatabase = async () => {
+const myDatabaseSeeds = async () => {
 
   // Add the `await` keyword infront of the expressions inside the `async` function.
   await sequelize.sync({ force: true });
 
   // Once JavaScript recogonizes the `await` keyword it waits for the promise to be fufilled before moving on.
+  await Department.bulkCreate(departmentSeedData);
+  await Role.bulkCreate(roleSeedData);
   await Employee.bulkCreate(employeeSeedData);
 
-  // TODO: look into this...
-  await Role.bulkCreate(roleSeedData);
 
   process.exit(0);
 };
 
-employeeSeedDatabase();
+myDatabaseSeeds();
