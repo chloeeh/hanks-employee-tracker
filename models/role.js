@@ -10,16 +10,13 @@ Role.init(
       primaryKey: true,
       autoIncrement: true
     },
-    first_name: {
+    title: {
       type: DataTypes.STRING
     },
-    last_name: {
+    salary: {
       type: DataTypes.STRING
     },
-    role_id: {
-      type: DataTypes.INTEGER
-    },
-    manager_id: {
+    department_id: {
       type: DataTypes.INTEGER
     }
   },

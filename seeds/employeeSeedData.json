@@ -1,0 +1,42 @@
+[
+  {
+    
+    "first_name": "Patrick",
+    "last_name": "Whalen",
+    "role_id": 1,
+    "manager_id": 1987,
+    "is_accessible": true
+  },
+  {
+    
+    "first_name": "Justin",
+    "last_name": "Epperson",
+    "role_id": 2,
+    "manager_id": 1987,
+    "is_accessible": true
+  },
+  {
+    
+    "first_name": "Gary",
+    "last_name": "Bradley",
+    "role_id": 3,
+    "manager_id": 1970,
+    "is_accessible": true
+  },
+  {
+    
+    "first_name": "Chloe",
+    "last_name": "Hanks",
+    "role_id": 2,
+    "manager_id": 1987,
+    "is_accessible": true
+  },
+  {
+    
+    "first_name": "Colin",
+    "last_name": "Campbell",
+    "role_id": 4,
+    "manager_id": 1950,
+    "is_accessible": true
+  }
+]
